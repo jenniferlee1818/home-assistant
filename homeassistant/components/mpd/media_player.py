@@ -306,8 +306,8 @@ class MpdDevice(MediaPlayerEntity):
         commands = []
         with suppress(mpd.ConnectionError):
             commands = list(await self._client.commands())
-        can_albumart = "albumart" in commands
-        can_readpicture = "readpicture" in commands
+        can_albumart = "albumart" in commands and "api/tts_proxy" not in self._currentsong.get("file")
+        can_readpicture = "readpicture" in commands and and "api/tts_proxy" not in self._currentsong.get("file")
 
         response = None
 
